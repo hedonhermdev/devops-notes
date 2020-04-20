@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  db:
+    container_name: djangoapp_database
+    image: postgres:latest
+    restart: always
+    env_file:
+      - ./db.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+  web:
+    container_name: djangoapp_web
+    build: ./djangoapp
+    command: gunicorn djangoapp.wsgi:application --bind 0.0.0.0:8000 --workers=4
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    volumes:
+      - staticfiles:/home/app/web/static/
+      - mediafiles:/home/app/web/media/
+  nginx:
+    container_name: djangoapp_nginx
+    image: nginx:alpine
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - staticfiles:/home/app/web/static/
+      - mediafiles:/home/app/web/media/
+    ports: 
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - web
+  
+
+volumes:
+  postgres-data:
+  staticfiles:
+  mediafiles:
+
