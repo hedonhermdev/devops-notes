@@ -1,9 +1,11 @@
 # DevOps Notes
-  This repo contains minimal configs of various cases deployment in containers along with other useful tips. Made this as a reference for myself. You probably wont use the exact stack but a lot of niche details are common. 
+  This repo contains minimal configs of various cases of deployment in containers along with other useful tips. Made this as a reference for myself. You probably wont use the exact stack but a lot of niche details are common. 
   
-## Miscallaneous Resources:
+## Miscellaneous Resources:
+  - Setting up SSH keys: https://www.digitalocean.com/docs/droplets/how-to/add-ssh-keys/
+  
   - Securing Nginx inside a Docker container: https://www.digitalocean.com/community/tutorials/how-to-secure-a-containerized-node-js-application-with-nginx-let-s-encrypt-and-docker-compose
-  - 
+
  
 ## Setting up a Git remote on your private server
   I do this as the root user. Its probably not the best idea but works. 
@@ -64,4 +66,4 @@
     echo "Failed with exit code $RESULT"
   fi
   ```
-  Basically whenever you push to the remote server. If you have a test suite too,  just squeeze in a `pytest` command to make sure everything works before bringing down the containers. 
+  Basically whenever you push to the remote server make sure run a couple of checks and rebuild the existing containers. If you have a test suite too,  just squeeze in a `pytest` command to make sure everything works before bringing down the containers. 
