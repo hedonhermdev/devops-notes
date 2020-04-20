@@ -34,6 +34,7 @@
   Also I highly recommend using an ssh-key rather than a root password. 
   
 ## Homegrown Solution for Continuous Deployment  
+This is a post-receive hook I use to deploy whenever I push without having to ssh to the server. 
   ```bash
   #!/bin/bash
 
